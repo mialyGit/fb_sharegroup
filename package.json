@@ -1,0 +1,33 @@
+{
+  "name": "fb_sharegroup",
+  "version": "1.0.0",
+  "description": "Fb group sharing permet de pubier automatiquement un statut dans plusieurs groupes",
+  "main": "index.js",
+  "bin": {
+    "fb_sharegroup": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Make Lucid",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "chrome-paths": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "puppeteer": "^13.4.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
+  },
+  "pkg": {
+    "assets": [
+      "public/**/*"
+    ],
+    "targets": [
+      "node14-macos-x64"
+    ]
+  }
+}

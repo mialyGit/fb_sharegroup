@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Bot facebook </title>
+	<link href="/assets/css/font-face.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="/assets/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/assets/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/assets/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="/assets/select2/select2.min.css">
+    <link href="/assets/css/main.css" rel="stylesheet" media="all">
+    <link href="/assets/css/theme.css" rel="stylesheet" media="all">
+    <link href="/assets/css/custom.css" rel="stylesheet" media="all">
+
+    <link rel="stylesheet" href="/assets/sweetalert2.css">
+
+    <!-- <link rel="stylesheet" href="/assets/custom.css"> -->
+</head>
+<body class="animsition" onload="show_table2(JSON.parse(window.sessionStorage.getItem('dt')))">
+    <div class="page-wrapper">
+        <!-- WELCOME-->
+        <section class="welcome2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="welcome2-inner m-t-30">
+                            <div class="login-logo">
+                                <img src="/assets/fb.png" alt="Facebook" title="Facebook" style="height: 50px; margin-top: -20px; margin-right: 20px;"> <span class="title-6" style="font-size: 40px;">bot facebook</span>
+                            </div>
+
+                            <div class="welcome2-greeting">
+                                <h1 class="title-6">👋 Salut <span class="username"></span> </h1>
+                                <p>Pour les comptes debutants (FAKE), il faut être prudent et ne pas partager plus de 10 publications / jour. Ce script propose une PAUSE de <span class="waitbefore_text"></span> entre chaque publication dans les groupes et <span class="between_text"></span>  toutes les <span class="every_text"></span> publications.</p> <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END WELCOME-->
+        
+        <form id="submit_form" method="post" class="form-horizontal">
+
+        <section class="lbcbox">
+            <div class="login200-form">
+
+                <div class="wrap-label200 rs1"  style="background:#f0f0f0">
+                    <span class="label-input200"><h5>Ton compte facebook</h5></span>
+                </div>
+                                    
+                <div class="wrap-input200">
+                    <input class="input200 email_fb" type="email" id="email_fb" name="email_fb" value="" autocomplete="off">
+                    <span class="label-input200"><i class="fa fa-user color-lbc"></i> Login</span>
+                </div>
+                                    
+                <div class="wrap-input200 rs2">
+                    <span class="btn-show-pass">
+                        <i class="zmdi zmdi-eye"></i>
+                    </span>
+
+                    <input class="input200 password_fb" type="password" id="password_fb" name="password_fb" value="" autocomplete="new-password">
+                    <span class="label-input200"><i class="fa fa-lock color-lbc"></i> Mot de passe</span>
+                </div>
+            </div>
+        </section>  
+
+        <section class="p-t-30">
+            <div class="login200-form" class="m-t-30" style="background:#fff">
+                <div class="row form-group p-l-10 p-r-10 m-l-0 m-r-0" style="width: 100%;">
+                    <div class="col-6 pt-4">
+                        <label><h6> <i class="fa fa-bullhorn color-lbc" ></i> Multi Url. Separated by space ↓ </h6> </label>
+                        <input id="url" name="url" type="text" placeholder="Coller ici le(s) lien(s) du publication" class="form-control-sm form-control" value="" required onfocus="this.select();">
+                    </div>
+                    <div class="col-6 pt-4">
+                        <label><h6> <i class="fa fa-tags color-lbc" ></i> Multi Description. Separated by slash ↓ </h6> </label>
+                        <textarea placeholder="Description(s) separé(s) par un '/'" name="ap" class="form-control-sm form-control ap" required onfocus="this.select();"></textarea>
+                    </div>
+                    <div class="col-6 pt-2">
+                        <label><h6> <i class="fa fa-hashtag color-lbc" ></i> Multi Hashtag. Separated by space ↓ </h6> </label>
+                        <input id="hashtag" name="hashtag" type="text" placeholder="Hashtag(s)" class="form-control-sm form-control hashtag" value="" required onfocus="this.select();">
+                    </div>
+                    <div class="col-6 pt-2">
+                        <label><h6> <i class="fa fa-inbox color-lbc" ></i> Alt Url. Separated by space ↓ </h6> </label>
+                        <input id="url_alt" name="url_alt" type="text" placeholder="Alt Url" class="form-control-sm form-control url_alt" value="" required onfocus="this.select();">
+                    </div>
+                    
+                    <div class="col-6 pt-4">
+                        <textarea rows="3" placeholder="Groups ID to filter. Separated by '|'" name="aq" class="form-control-sm form-control aq" required onfocus="this.select();" style="background-color: #e0a8004d;font-size: 10px;"></textarea>
+                    </div>
+                    <div class="col-6 pt-4">
+                        <textarea rows="3" placeholder="Encoded string. Separated by '|'" name="av" class="form-control-sm form-control av" required onfocus="this.select();" style="background-color: #0069d924;font-size: 10px;"></textarea>
+                    </div>
+                    <div class="col-6 pt-4">
+                        <label><h4><i class="fa fa-spinner color-lbc m-r-10"></i> Durée : <span class="dl">00mn 00s</span></h4> </label>
+                    </div>
+                    <div class="col-6 pt-4">    
+                        <div class="pull-right">
+                            <button id="filtergroup" type="button" class="btn btn-warning btn-sm filtergroup">Filter Groups</button>
+                            <button id="buttav" type="button" class="btn btn-primary btn-sm buttav">Filter Encoded String</button>
+                        </div>                             
+                    </div>                        
+                </div>
+            </div>
+
+            <div class="login200-form m-t-30" style="background:#fff">
+                <div class="row form-group p-l-10 p-r-10 m-l-0 m-r-0" style="width: 100%;">
+                    <div class="col pt-2">
+                        <label><h6><i class="fa fa-pause color-lbc" ></i> Pause </h6> </label>                        
+                        <div class="input-group input-group-sm">
+                            <input id="waitbefore" name="waitbefore" type="number" min="0" placeholder="en seconde" class="form-control-sm form-control waitbefore" value="5" oninput="validity.valid||(value='');" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">secondes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col pt-2">
+                        <label><h6><i class="fa fa-clock color-lbc"></i> Chaque</h6> </label>
+                        <div class="input-group input-group-sm">
+                            <input id="every" name="every" type="number" min="0" placeholder="nombre de fois" class="form-control-sm form-control" value="4" oninput="validity.valid||(value='');" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">annonces</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col pt-2">
+                        <label><h6><i class="fa fa-spinner color-lbc"></i> Attendre</h6> </label>
+                        <div class="input-group input-group-sm">
+                          <input id="between" name="between" type="number" min="0" placeholder="en seconde" class="form-control-sm form-control" value="10" oninput="validity.valid||(value='');" required>
+                          <div class="input-group-append">
+                            <span class="input-group-text">secondes</span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col pt-4">
+                        <div class="pt-3">
+                            <label class="switch switch-text switch-danger switch-pill">
+                                <input id="silent" name="silent" type="checkbox" class="switch-input color-lbc">
+                                <span data-on="On" data-off="Off" class="switch-label"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                            <small style="font-size: 75%;"> Silent </small>
+                        </div>
+                    </div>
+                    <div class="col pt-4">
+                        <span class="wrap-login100-form-btn pull-right" style="width: 260px;">
+                            <div class="login100-form-bgbtn"></div>
+                            <button type="submit" class="login100-form-btn">
+                                <span class="title--sbold m-r-10">LANCER</span> <img src="/assets/fb.png" alt="Facebook" title="Facebook" style="margin-bottom: 5px;height: 1.8em;">
+                            </button>
+                        </span>
+                        
+                        <input type="hidden" id="launch" value="0">
+                        <input type="hidden" id="lang" value="fr">
+
+                        <input type="hidden" id="csv_data" name="csv_data" value="">
+                    </div>
+                </div>
+            </div>
+                
+            <div id="txtFileName" class="m-l-10 m-r-10">
+            </div>
+        </section>
+
+        </form>
+
+
+        <section>
+            <div class="row">
+                <div id="result_text" class="col-sm-12 p-l-50">
+                    <h3></h3>
+                </div>
+            </div>
+            <div class="login200-form m-t-50 m-b-30" style="background:#fff">
+                <div class="row form-group p-l-10 p-t-30 p-r-10 p-b-10 m-l-0 m-r-0" style="width: 100%;">
+                    <div class="col-sm-12">
+                        <!-- DATA TABLE-->
+                        <div id="table_data" class="table-responsive bg-light">
+                        </div>
+                        <!-- END DATA TABLE-->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="modalw"><!-- Place at bottom of page --></div>
+<!-- 
+    <div id="myModal" class="modal" style="width:100%">
+        <div class="modal-content">
+            <h2 class="titleb">MY FB BOT</h2>
+            <div id="texts" style="margin-bottom: 10px; ">
+                <span class="text_bot"> 12 / 100 publications</span> 
+                <span class="text_bot" style="margin-left: 25%;">20 / 100 groupes</span>
+            </div>
+            <div id="btns">
+                <button class="btn_bot pauseb">
+                    <i class="fa fk fa-pause"></i><span>Pause</span>
+                </button>
+                <button class="btn_bot stopb">
+                    <i class="fa fk fa-stop"></i> <span>Stop</span>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+    <script src="/assets/vendor/jquery-3.2.1.min.js"></script>
+    <script src="/assets/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="/assets/vendor/animsition/animsition.min.js"></script>
+    <script src="/assets/sweetalert.min.js"></script>
+    <script src="/assets/select2/select2.full.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <!-- <script src="/assets/js/custom.js"></script> -->
+    <script src="/assets/js/jquery.csv.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+    <!-- <script src="/assets/sweetalert2.js"></script> -->
+
+    <script>
+
+        // const Toast = swal.mixin({
+        //                 // toast: true,
+                        
+        //                 backdrop: false,
+        //                 allowOutsideClick: false,
+        //                 allowEscapeKey: false,
+        //                 position: 'bottom-end',
+        //                 focusConfirm : false,
+        //                 showCancelButton: true,
+        //                 showDenyButton: true,
+        //                 confirmButtonText: `Pause`,
+        //                 denyButtonText: `Stop`,
+        //                 cancelButtonText: `1 / 2 boucles`,
+        //                 });
+        
+        //                 Toast.fire({
+        //                     // icon: 'info',
+        //                     html : `<button type="button" class="swal2-success swal2-styled" aria-label="" style="display: inline-block;"> 1 / 4 annonces</button>
+        //                     <button type="button" class="swal2-warning swal2-styled" aria-label="" style="display: inline-block;"> 4 / 5 pages</button>`,
+        //                     title: `<img src="assets/images/icon/logo.png" alt="lbc" style="height: 1.5em" /> Onclebot`,
+        //                     preConfirm: () => {
+        //                         let btn = $(".swal2-confirm")
+        //                         btn.text() == "Pause" ? btn.text("Play") : btn.text("Pause")
+        //                         return false;
+        //                         },
+        //                     preDeny: () => {
+        //                         let btn = $(".swal2-deny")
+        //                         btn.text() == "Stop" ? btn.text("Stopping...") : btn.text("Stop")
+        //                         return false;
+        //                     },
+        //             })
+        //             setTimeout(() => {
+        //                 Toast.getCancelButton().disabled = true
+        //             }, 500);
+
+        function showPassword() {
+            var x = document.getElementById("password_lbc");
+            var y = document.getElementById("show_pass");
+            if (x.type === "password") {
+                y.classList.remove("fa-eye");
+                y.classList.add("fa-eye-slash");
+                x.type = "text";
+            } else {
+                y.classList.remove("fa-eye-slash");
+                y.classList.add("fa-eye");
+                x.type = "password";
+            }
+        }
+
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function() { $body.addClass("loading"); },
+            ajaxStop: function() { $body.removeClass("loading"); }    
+        });
+        
+        // $(document).on({
+        //     ajaxStart: function() { Waiting.fire(); },
+        //     ajaxStop: function() { Waiting.close(); }    
+        // });
+
+
+        $(document).ready(function(){
+            var loc = window.location;
+            var baseUrl = loc.protocol + "//" + loc.hostname + (loc.port? ":"+loc.port : "");
+
+            $('#submit_form').submit(function(e){
+
+                if(!window.navigator.onLine){
+                    swal("Vérifie ta connexion internet","Je n'arrive pas à me connecter","error");    
+                } else {
+                    authentification();
+                }
+                return false;
+            })
+
+            function authentification(){
+                $('#launch').val('1');
+                $body.addClass("loading");
+            }
+        })
+    </script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
